@@ -5,9 +5,11 @@ function App() {
     <div className="App">
       <title>IELTS Speaking Test Simulator</title>
       <header className="App-header">
-        <h1>IELTS Speaking Simulator</h1>
-        <p>Answer the following questions as if you are in the IELTS speaking test.</p>
-        <a href="page1.js" class = "button">Start</a>
+      <div class="centered-column">
+        <h1>Welcome to the Centered Page</h1>
+        <p>This is a simple centered column layout.</p>
+        <button class="btn">Click Me</button>
+  </div>
       </header>
     </div>
   );
