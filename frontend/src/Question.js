@@ -10,7 +10,7 @@ function App() {
           <p class = "detail"> Please click on the button below to start the test when you are ready.</p>
 
           <div id="backend-content" class="content-placeholder">
-            <p>Title</p>
+            <p>Title</p>  
           </div>
           <br></br>
           <button class="button">Record (Photo replace)</button>
