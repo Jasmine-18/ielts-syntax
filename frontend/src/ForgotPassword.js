@@ -1,4 +1,4 @@
-import './App.css';
+import './ForgotPassword.css';
 
 function App() {
   return (
@@ -9,12 +9,13 @@ function App() {
           <title>IELTS Speaking Test Simulator</title>
           <h4>Forgot Password</h4>
           <form>
+            <p>Email Address</p>
             <input type="email" placeholder="Enter your email" required />
             <button type="submit">Reset Password</button>
           </form>
           <p>
             Remembered your password?{' '}
-            <span className="link" onClick={() => setCurrentPage('login')}>
+            <span className="link" /*onClick={() => setCurrentPage('login')}*/>
               Login here
             </span>
           </p>

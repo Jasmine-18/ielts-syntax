@@ -7,20 +7,24 @@ function App() {
       <header className="App-header">
         <div className="centered-column">
           <title>IELTS Speaking Test Simulator</title>
-          <h4>Welcome</h4>
+          <h4>Login</h4>
           <form>
             <input type="email" placeholder="Email" required />
+          </form>
+          <form>
             <input type="password" placeholder="Password" required />
+          </form>
+          <form>
             <button type="submit">Login</button>
           </form>
           <p>
             Don’t have an account?{' '}
-            <span className="link" onClick={() => }>
+            <span className="link" /*onClick={() => }*/>
               Register here
             </span>
           </p>
           <p>
-            <span className="link" onClick={() => }>
+            <span className="link" /*onClick={() => }*/>
               Forgot Password?
             </span>
           </p>

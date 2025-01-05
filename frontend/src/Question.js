@@ -1,23 +1,61 @@
 import './App.css';
+import recordButtonImage from './assets/mic.png'; // Adjust the path as necessary
+import { useState, useRef } from 'react';
 
-function App() {
+function Question() {
+  const [isRecording, setIsRecording] = useState(false);
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
+
+  const handleRecord = async () => {
+    if (isRecording) {
+      // Stop recording
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    } else {
+      // Start recording
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      audioChunksRef.current = [];
+
+      mediaRecorderRef.current.ondataavailable = (event) => {
+        audioChunksRef.current.push(event.data);
+      };
+
+      mediaRecorderRef.current.onstop = () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const link = document.createElement('a');
+        link.href = audioUrl;
+        link.download = 'recording.wav';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+
+      mediaRecorderRef.current.start();
+      setIsRecording(true);
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <div className="centered-column">
-          <title>IELTS Speaking Test Simulator</title>
           <h4>Below are the questions for this oral test.</h4>
-          <p class = "detail"> Please click on the button below to start the test when you are ready.</p>
-
-          <div id="backend-content" class="content-placeholder">
+          <p className="detail"> Please click on the button below to start the test when you are ready.</p>
+          <div id="backend-content" className="content-placeholder">
             <p>Title</p>  
           </div>
-          <br></br>
-          <button class="button">Record (Photo replace)</button>
+          <br />
+          <button className="record-button" onClick={handleRecord}>
+            <img src={recordButtonImage} alt="Record" className="record-button-image" />
+          </button>
+          {isRecording && <p>Recording...</p>}
         </div>
       </header>
     </div>
   );
 }
 
-export default App;
+export default Question;
