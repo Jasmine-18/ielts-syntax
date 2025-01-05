@@ -1,26 +1,20 @@
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import './App.css';
 
-function App() {
+function Result() {
+  const location = useLocation();
+  const feedback = location.state?.feedback || "No feedback available.";
+
   return (
     <div className="App">
       <header className="App-header">
-        <div className="centered-column">
-          <title>IELTS Speaking Test Simulator</title>
-          <h4>Below are the result of the test.</h4>
-
-          <div id="backend-content" class="content-placeholder">
-            <p>Result</p>
-          </div>
-          <br></br>
-          <br></br>
-          <div className="button-container">
-            <button class="button ">Share</button>
-            <button class="button ">Listen</button>
-          </div>
-        </div>
+        <h1>Recording Result</h1>
+        <p>Your recording has been saved successfully.</p>
+        <p>{feedback}</p>
       </header>
     </div>
   );
 }
 
-export default App;
+export default Result;

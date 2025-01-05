@@ -1,29 +1,47 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
 
-function App() {
+function Register() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    // Add your registration logic here
+    alert('Registration successful');
+    navigate('/');
+  };
+
   return (
     <div className="App">
-      <title>IELTS Speaking Test Simulator</title>
       <header className="App-header">
-        <div className="centered-column">
-          <title>IELTS Speaking Test Simulator</title>
-          <h4>Register</h4>
-          <form>
-            <input type="text" placeholder="Username" required /><br></br>
-            <input type="email" placeholder="Email" required /><br></br>
-            <input type="password" placeholder="Password" required /><br></br>
-            <button type="submit">Register</button>
-          </form>
-          <p>
-            Already have an account?{' '}
-            <span className="link" /*onClick={() => setCurrentPage('login')}*/>
-              Login here
-            </span>
-          </p>
-        </div>
+        <h1>Register</h1>
+        <form onSubmit={handleRegister}>
+          <div>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Password:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="button">Register</button>
+        </form>
       </header>
     </div>
   );
 }
 
-export default App;
+export default Register;

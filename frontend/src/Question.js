@@ -1,11 +1,13 @@
 import './App.css';
 import recordButtonImage from './assets/mic.png'; // Adjust the path as necessary
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Question() {
   const [isRecording, setIsRecording] = useState(false);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
+  const navigate = useNavigate();
 
   const handleRecord = async () => {
     if (isRecording) {
@@ -31,6 +33,10 @@ function Question() {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+
+        // Navigate to Result.js with feedback
+        const feedback = "Your recording was successful!";
+        navigate('/result', { state: { feedback } });
       };
 
       mediaRecorderRef.current.start();
