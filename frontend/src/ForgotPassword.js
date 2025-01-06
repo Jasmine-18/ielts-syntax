@@ -4,20 +4,29 @@ import './App.css';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
-  const [newPassword, setNewPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleForgotPassword = (e) => {
+  const handleForgotPassword = async (e) => {
     e.preventDefault();
-    // Retrieve user credentials from local storage
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser && storedUser.email === email) {
-      // Update password in local storage
-      localStorage.setItem('user', JSON.stringify({ email, password: newPassword }));
-      alert('Password reset successful');
-      navigate('/');
-    } else {
-      alert('Email not found');
+    try {
+      const response = await fetch('http://localhost:3000/api/forgot-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        alert('Password reset link sent to your email');
+        navigate('/');
+      } else {
+        const errorData = await response.json();
+        alert(errorData.message || 'Email not found');
+      }
+    } catch (error) {
+      console.error('Error sending password reset email:', error);
+      alert('An error occurred. Please try again later.');
     }
   };
 
@@ -32,15 +41,6 @@ function ForgotPassword() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>New Password:</label>
-            <input
-              type="password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
               required
             />
           </div>

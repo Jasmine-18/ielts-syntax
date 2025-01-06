@@ -9,9 +9,12 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Retrieve user credentials from local storage
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser && storedUser.email === email && storedUser.password === password) {
+    // Retrieve existing users from local storage
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    // Check if the email and password match any registered user
+    const user = existingUsers.find(user => user.email === email && user.password === password);
+
+    if (user) {
       navigate('/main');
     } else {
       alert('Invalid credentials');

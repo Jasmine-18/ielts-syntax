@@ -9,9 +9,21 @@ function Register() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // Add your registration logic here
-    alert('Registration successful');
-    navigate('/');
+    // Retrieve existing users from local storage
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    // Check if the email is already registered
+    const userExists = existingUsers.some(user => user.email === email);
+
+    if (userExists) {
+      alert('Email is already registered');
+    } else {
+      // Add new user to the list of existing users
+      const newUser = { email, password };
+      existingUsers.push(newUser);
+      localStorage.setItem('users', JSON.stringify(existingUsers));
+      alert('Registration successful');
+      navigate('/');
+    }
   };
 
   return (

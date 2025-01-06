@@ -1,25 +1,39 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './App.css';
 
 function Profile() {
   const storedUser = JSON.parse(localStorage.getItem('user'));
   const [email, setEmail] = useState(storedUser?.email || '');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   const handleUpdateProfile = (e) => {
     e.preventDefault();
-    // Update user email in local storage
-    localStorage.setItem('user', JSON.stringify({ email, password: storedUser.password }));
-    alert('Profile updated successfully');
+    // Retrieve existing users from local storage
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    // Find the user by email
+    const userIndex = existingUsers.findIndex(user => user.email === storedUser.email);
+
+    if (userIndex !== -1) {
+      // Update the user's email
+      existingUsers[userIndex].email = email;
+      localStorage.setItem('users', JSON.stringify(existingUsers));
+      alert('Profile updated successfully');
+    }
   };
 
   const handleChangePassword = (e) => {
     e.preventDefault();
-    // Update user password in local storage
-    localStorage.setItem('user', JSON.stringify({ email: storedUser.email, password }));
-    alert('Password changed successfully');
+    // Retrieve existing users from local storage
+    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    // Find the user by email
+    const userIndex = existingUsers.findIndex(user => user.email === storedUser.email);
+
+    if (userIndex !== -1) {
+      // Update the user's password
+      existingUsers[userIndex].password = password;
+      localStorage.setItem('users', JSON.stringify(existingUsers));
+      alert('Password changed successfully');
+    }
   };
 
   return (
@@ -55,4 +69,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Profile; 
