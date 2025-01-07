@@ -6,6 +6,8 @@ import ForgotPassword from './ForgotPassword';
 import Profile from './Profile';
 import Question from './Question';
 import Result from './Result';
+import ResetPassword from './ResetPassword';
+import profileIcon from './assets/Profile.png'; // 确保你有一个人物图片
 
 function AppContent() {
   const location = useLocation();
@@ -18,6 +20,9 @@ function AppContent() {
     <div className="App">
       <title>IELTS Speaking Test Simulator</title>
       <header className="App-header">
+        <Link to="/profile" className="profile-button">
+          <img src={profileIcon} alt="Profile" className="profile-icon" />
+        </Link>
         <h1>IELTS Speaking Simulator</h1>
         <p>Answer the following questions as if you are in the IELTS speaking test.</p>
         <Link to="/question" className="button">Start</Link>
@@ -37,6 +42,7 @@ function App() {
         <Route path="/main" element={<AppContent />} />
         <Route path="/question" element={<Question />} />
         <Route path="/result" element={<Result />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
     </Router>
   );

@@ -34,8 +34,8 @@ function ForgotPassword() {
     <div className="App">
       <header className="App-header">
         <h1>Forgot Password</h1>
-        <form onSubmit={handleForgotPassword}>
-          <div>
+        <form onSubmit={handleForgotPassword} className="form-container">
+          <div className="form-group">
             <label>Email:</label>
             <input
               type="email"

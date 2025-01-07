@@ -1,5 +1,6 @@
+// filepath: /d:/github/ielts-syntax/frontend/src/Question.js
 import './App.css';
-import recordButtonImage from './assets/mic.png'; // Adjust the path as necessary
+import recordButtonImage from './assets/mic.png'; 
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,9 +35,8 @@ function Question() {
         link.click();
         document.body.removeChild(link);
 
-        // Navigate to Result.js with feedback
-        const feedback = "Your recording was successful!";
-        navigate('/result', { state: { feedback } });
+        // Navigate to Result.js
+        navigate('/result');
       };
 
       mediaRecorderRef.current.start();

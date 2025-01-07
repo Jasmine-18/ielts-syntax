@@ -1,89 +1,182 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App {
+  text-align: center;
+  max-width: 800px;
+  width: 100%;
+  padding: 50px;
+  border: 2px solid #1a1a1a;
+  border-radius: 10px;
+  background-color: #fff;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 50px auto;
+  color: #333;
+  position: relative;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.button {
-  display: inline-block;
-  padding:15px 30px;
-  font-size: 18px; 
-  font-weight: bold; 
-  color: white; 
-  background-color: #4CAF50; 
-  border: none; 
-  border-radius: 8px; 
+.profile-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s; 
-  text-decoration: none;
-  margin-right : 10px;
-  margin-left : 10px;
-  align-items: center;
+  outline: none;
+}
+
+.profile-icon {
+  width: 40px; /* 调整宽度 */
+  height: 40px; /* 调整高度 */
+  border-radius: 50%; /* 使图片变成圆形 */
+  border: 2px solid #007bff; /* 添加边框 */
+  padding: 5px; /* 添加内边距 */
+  transition: transform 0.3s ease; /* 添加过渡效果 */
+}
+
+.profile-icon:hover {
+  transform: scale(1.1); /* 鼠标悬停时放大 */
 }
 
 .centered-column {
-  max-width: 700px;
-  width: 100%; 
-  padding: 50px; 
-  border: 2px solid #61dafb; 
-  text-align: center; 
-  box-sizing: border-box; 
-  color: #ffffff; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.detail {
+  margin: 10px 0;
+  font-size: 1.2em;
 }
 
 .content-placeholder {
-  margin-top: 20px; 
-  padding: 15px; 
-  background-color: rgba(255, 255, 255, 0.1); 
-  color: #61dafb; 
-  font-size: 18px; 
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  color: #333;
+  font-size: 18px;
   min-height: 50px;
   display: flex;
-  align-items: center; 
-  justify-content: center; 
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.detail{
-  font-size: 14px;
+.record-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
 }
 
-.button:hover{
+.record-button-image {
+  width: 50px; /* 调整宽度 */
+  height: 50px; /* 调整高度 */
+}
+
+.button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
   background-color: #0056b3;
 }
 
-h1{
-  font-size: 3rem; 
+h1 {
+  font-size: 3rem;
   letter-spacing: 1px;
   margin-bottom: 10px;
-  color:#61dafb;
+  color: #007bff;
 }
 
-p{
-  font-size: 14px;
-  letter-spacing: 1px;
-  margin-bottom: 30px;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+form label {
+  margin-right: 10px;
+  width: 150px; /* 调整宽度 */
+  text-align: right;
+}
+
+form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 200px; /* 调整宽度 */
+}
+
+form button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+.link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.profile-details {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.profile-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
