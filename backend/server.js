@@ -2,6 +2,7 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const crypto = require('crypto');
 
 const app = express();
 const port = 3000;
@@ -11,9 +12,12 @@ app.use(cors()); // 启用所有路由的CORS
 
 // 模拟用户数据库
 const users = [
-  { email: 'user1@example.com', password: 'password1' },
-  { email: 'user2@example.com', password: 'password2' },
+  { email: 'user1@example.com', password: 'password1', username: 'user1', firstName: 'John', lastName: 'Doe' },
+  { email: 'user2@example.com', password: 'password2', username: 'user2', firstName: 'Jane', lastName: 'Doe' },
 ];
+
+// 模拟重置令牌数据库
+const resetTokens = {};
 
 // 配置nodemailer
 const transporter = nodemailer.createTransport({
@@ -34,11 +38,15 @@ app.post('/api/forgot-password', (req, res) => {
     return res.status(404).json({ message: 'Email not found' });
   }
 
+  // 生成重置令牌
+  const token = crypto.randomBytes(20).toString('hex');
+  resetTokens[token] = email;
+
   const mailOptions = {
     from: 'your-email@gmail.com',
     to: email,
     subject: 'Password Reset',
-    text: `Click the link to reset your password: http://localhost:3000/reset-password?email=${email}`,
+    text: `Click the link to reset your password: http://localhost:3000/reset-password?token=${token}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -53,7 +61,12 @@ app.post('/api/forgot-password', (req, res) => {
 });
 
 app.post('/api/reset-password', (req, res) => {
-  const { email, password } = req.body;
+  const { token, newPassword } = req.body;
+
+  const email = resetTokens[token];
+  if (!email) {
+    return res.status(400).json({ message: 'Invalid or expired token' });
+  }
 
   // 检查用户数据库中是否存在该邮箱
   const userIndex = users.findIndex(user => user.email === email);
@@ -63,7 +76,8 @@ app.post('/api/reset-password', (req, res) => {
   }
 
   // 更新用户密码
-  users[userIndex].password = password;
+  users[userIndex].password = newPassword;
+  delete resetTokens[token];
   return res.status(200).json({ message: 'Password reset successfully' });
 });
 

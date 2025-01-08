@@ -22,12 +22,22 @@ body {
 
 .App-header {
   margin-bottom: 20px;
+  position: relative;
 }
 
-.profile-button {
+.header-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   position: absolute;
   top: 10px;
   left: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  box-sizing: border-box;
+}
+
+.profile-button {
   background: none;
   border: none;
   cursor: pointer;
@@ -45,6 +55,21 @@ body {
 
 .profile-icon:hover {
   transform: scale(1.1); /* 鼠标悬停时放大 */
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  height: 40px; /* 调整高度 */
+  line-height: 40px; /* 调整行高 */
+}
+
+.logout-button:hover {
+  color: #0056b3;
 }
 
 .centered-column {
