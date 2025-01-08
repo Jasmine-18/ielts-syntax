@@ -1,8 +1,7 @@
-// filepath: /d:/github/ielts-syntax/frontend/src/Question.js
-import './App.css';
-import recordButtonImage from './assets/mic.png'; 
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './App.css';
+import recordButtonImage from './assets/mic.png'; // 确保你有这个图片
 
 function Question() {
   const [isRecording, setIsRecording] = useState(false);
@@ -47,9 +46,9 @@ function Question() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>Below are the questions for this oral test.</h1>
+        <p>Answer the following questions as if you are in the IELTS speaking test.</p>
         <div className="centered-column">
-          <h4>Below are the questions for this oral test.</h4>
-          <p className="detail"> Please click on the button below to start the test when you are ready.</p>
           <div id="backend-content" className="content-placeholder">
             <p>Title</p>  
           </div>
@@ -57,7 +56,7 @@ function Question() {
           <button className="record-button" onClick={handleRecord}>
             <img src={recordButtonImage} alt="Record" className="record-button-image" />
           </button>
-          {isRecording && <p>Recording...</p>}
+          {isRecording && <p className="recording-text">Recording...</p>}
         </div>
       </header>
     </div>

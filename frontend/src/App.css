@@ -113,11 +113,27 @@ body {
   border: none;
   cursor: pointer;
   outline: none;
+  transition: transform 0.3s ease;
+}
+
+.record-button:hover {
+  transform: scale(1.1);
 }
 
 .record-button-image {
-  width: 50px; /* 调整宽度 */
-  height: 50px; /* 调整高度 */
+  width: 40px; /* 调整按钮大小 */
+  height: 40px; /* 调整按钮大小 */
+  border-radius: 50%;
+  border: 2px solid #007bff;
+  padding: 5px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.record-button-image:hover {
+  transform: scale(1.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .button {

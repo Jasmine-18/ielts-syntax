@@ -4,11 +4,11 @@ import './App.css';
 
 function Register() {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
   const validatePassword = (password) => {
@@ -33,77 +33,50 @@ function Register() {
 
     // Store user credentials in local storage
     const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-    const userExists = existingUsers.some(user => user.username === username || user.email === email);
+    const newUser = {
+      id: Date.now().toString(), // 使用时间戳作为用户ID
+      username,
+      email,
+      firstName,
+      lastName,
+      password
+    };
+    existingUsers.push(newUser);
+    localStorage.setItem('users', JSON.stringify(existingUsers));
+    localStorage.setItem('currentUserId', newUser.id);
 
-    if (userExists) {
-      alert('Username or email is already registered');
-    } else {
-      const newUser = { username, password, email, firstName, lastName };
-      existingUsers.push(newUser);
-      localStorage.setItem('users', JSON.stringify(existingUsers));
-      alert('Registration successful');
-      navigate('/');
-    }
+    // Navigate to main page or other page
+    navigate('/main');
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Register</h1>
-        <form onSubmit={handleRegister} className="form-container">
+        <form onSubmit={handleRegister}>
           <div className="form-group">
             <label>Username:</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label>Confirm Password:</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} required />
           </div>
           <div className="form-group">
             <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </div>
           <div className="form-group">
             <label>First Name:</label>
-            <input
-              type="text"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-            />
+            <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
           </div>
           <div className="form-group">
             <label>Last Name:</label>
-            <input
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
+            <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+          </div>
+          <div className="form-group">
+            <label>Password:</label>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </div>
+          <div className="form-group">
+            <label>Confirm Password:</label>
+            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
           </div>
           <button type="submit" className="button">Register</button>
         </form>
