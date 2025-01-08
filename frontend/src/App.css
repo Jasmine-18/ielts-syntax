@@ -30,9 +30,9 @@ body {
   justify-content: space-between;
   width: 100%;
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 10px;
+  top: 0; /* 将按钮放置在容器的顶部 */
+  left: 0;
+  right: 0;
   padding: 10px 20px;
   box-sizing: border-box;
 }
@@ -51,6 +51,9 @@ body {
   border: 2px solid #007bff; /* 添加边框 */
   padding: 5px; /* 添加内边距 */
   transition: transform 0.3s ease; /* 添加过渡效果 */
+  margin-top: -999px;
+  margin-bottom: 20px;
+  margin-left: -40px;
 }
 
 .profile-icon:hover {
@@ -64,12 +67,20 @@ body {
   cursor: pointer;
   font-size: 14px;
   text-decoration: underline;
-  height: 40px; /* 调整高度 */
+  height: 10px; /* 调整高度 */
   line-height: 40px; /* 调整行高 */
+  margin-top: -70px;
+  margin-bottom: 20px;
+  margin-right: -40px;
 }
 
 .logout-button:hover {
   color: #0056b3;
+}
+
+.content {
+  position: relative;
+  padding-top: 60px; /* 确保内容不会与按钮重叠 */
 }
 
 .centered-column {

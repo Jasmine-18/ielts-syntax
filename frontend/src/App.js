@@ -21,6 +21,10 @@ function AppContent() {
     navigate('/');
   };
 
+  const handleProfileClick = () => {
+    navigate('/profile');
+  };
+
   if (location.pathname === '/question' || location.pathname === '/result') {
     return null;
   }
@@ -30,9 +34,9 @@ function AppContent() {
       <title>IELTS Speaking Test Simulator</title>
       <header className="App-header">
         <div className="header-buttons">
-          <Link to="/profile" className="profile-button">
+          <button onClick={handleProfileClick} className="profile-button">
             <img src={profileIcon} alt="Profile" className="profile-icon" />
-          </Link>
+          </button>
           <button onClick={handleLogout} className="logout-button">Log Out</button>
         </div>
         <h1>IELTS Speaking Simulator</h1>

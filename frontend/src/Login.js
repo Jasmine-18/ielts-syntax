@@ -9,11 +9,13 @@ function Login() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Retrieve user credentials from local storage
+    
+    // 从本地存储中获取用户数据
     const storedUsers = JSON.parse(localStorage.getItem('users')) || [];
     const user = storedUsers.find(user => user.username === username && user.password === password);
 
     if (user) {
+      localStorage.setItem('isLoggedIn', 'true');
       navigate('/main');
     } else {
       alert('Invalid credentials');
