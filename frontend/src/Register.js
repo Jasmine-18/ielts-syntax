@@ -31,10 +31,14 @@ function Register() {
       return;
     }
 
-    // Store user credentials in local storage
     const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+    if (existingUsers.some(user => user.username === username)) {
+      alert('Username already exists');
+      return;
+    }
+
     const newUser = {
-      id: Date.now().toString(), // 使用时间戳作为用户ID
+      id: Date.now().toString(),
       username,
       email,
       firstName,
@@ -45,8 +49,7 @@ function Register() {
     localStorage.setItem('users', JSON.stringify(existingUsers));
     localStorage.setItem('currentUserId', newUser.id);
 
-    // Navigate to main page or other page
-    navigate('/main');
+    navigate('/login');
   };
 
   return (
@@ -82,7 +85,7 @@ function Register() {
         </form>
         <div>
           <p>
-            Already have an account? <Link to="/" className="link">Click here to login</Link>
+            Already have an account? <Link to="/login" className="link">Click here to login</Link>
           </p>
         </div>
       </header>

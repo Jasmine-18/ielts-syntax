@@ -10,6 +10,7 @@ import Question from './Question';
 import Result from './Result';
 import ResetPassword from './ResetPassword';
 import profileIcon from './assets/Profile.png'; 
+import Main from './Main';
 
 function AppContent() {
   const location = useLocation();
@@ -61,6 +62,7 @@ function App() {
         <Route path="/question" element={<Question />} />
         <Route path="/result" element={<Result />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/main" element={<Main />} />
       </Routes>
     </Router>
   );

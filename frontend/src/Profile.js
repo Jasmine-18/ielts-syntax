@@ -22,6 +22,7 @@ function Profile() {
         <header className="App-header">
           <h1>Profile</h1>
           <p>No user data available.</p>
+          <button onClick={() => navigate('/main')} className="button">Back to Main</button>
         </header>
       </div>
     );
@@ -46,6 +47,7 @@ function Profile() {
           </div>
         </div>
         <button onClick={() => navigate('/edit-profile')} className="button">Edit Profile</button>
+        <button onClick={() => navigate('/main')} className="button">Back to Main</button>
       </header>
     </div>
   );

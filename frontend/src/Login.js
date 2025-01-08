@@ -37,6 +37,9 @@ function Login() {
         </form>
         <div>
           <p>
+            <Link to="/forgot-password" className="link">Forgot password?</Link>
+          </p>
+          <p>
             Don't have an account? <Link to="/register" className="link">Click here to register</Link>
           </p>
         </div>
