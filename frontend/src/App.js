@@ -16,8 +16,8 @@ function AppContent() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // 清除用户登录状态（例如，清除本地存储中的用户数据）
-    localStorage.removeItem('users');
+    // 清除用户登录状态（例如，清除本地存储中的登录标志）
+    localStorage.removeItem('isLoggedIn');
     navigate('/');
   };
 

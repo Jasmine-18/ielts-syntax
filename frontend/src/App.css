@@ -195,6 +195,13 @@ form button:hover {
   text-decoration: underline;
 }
 
+.link-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
 .profile-details {
   text-align: left;
   margin-bottom: 20px;
