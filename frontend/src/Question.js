@@ -1,63 +1,32 @@
-import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
-import recordButtonImage from './assets/mic.png'; // 确保你有这个图片
 
 function Question() {
-  const [isRecording, setIsRecording] = useState(false);
-  const mediaRecorderRef = useRef(null);
-  const audioChunksRef = useRef([]);
-  const navigate = useNavigate();
+  const [questions, setQuestions] = useState([]);
 
-  const handleRecord = async () => {
-    if (isRecording) {
-      // Stop recording
-      mediaRecorderRef.current.stop();
-      setIsRecording(false);
-    } else {
-      // Start recording
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorderRef.current = new MediaRecorder(stream);
-      audioChunksRef.current = [];
-
-      mediaRecorderRef.current.ondataavailable = (event) => {
-        audioChunksRef.current.push(event.data);
-      };
-
-      mediaRecorderRef.current.onstop = () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-        const audioUrl = URL.createObjectURL(audioBlob);
-        const link = document.createElement('a');
-        link.href = audioUrl;
-        link.download = 'recording.wav';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        // Navigate to Result.js
-        navigate('/result');
-      };
-
-      mediaRecorderRef.current.start();
-      setIsRecording(true);
-    }
-  };
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        console.log('API URL:', process.env.REACT_APP_API_URL); // 检查环境变量是否正确加载
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/questions`);
+        setQuestions(response.data);
+      } catch (error) {
+        console.error('Error fetching questions:', error);
+      }
+    };
+    fetchQuestions();
+  }, []);
 
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Below are the questions for this oral test.</h1>
-        <p>Answer the following questions as if you are in the IELTS speaking test.</p>
-        <div className="centered-column">
-          <div id="backend-content" className="content-placeholder">
-            <p>Title</p>  
-          </div>
-          <br />
-          <button className="record-button" onClick={handleRecord}>
-            <img src={recordButtonImage} alt="Record" className="record-button-image" />
-          </button>
-          {isRecording && <p className="recording-text">Recording...</p>}
-        </div>
+        <h1>Questions</h1>
+        <ul>
+          {questions.map((question) => (
+            <li key={question.id}>{question.text}</li>
+          ))}
+        </ul>
       </header>
     </div>
   );

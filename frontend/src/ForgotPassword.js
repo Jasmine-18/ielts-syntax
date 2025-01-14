@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './App.css';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
 
-  const handleForgotPassword = (e) => {
+  const handleForgotPassword = async (e) => {
     e.preventDefault();
-    // 模拟发送 email 的过程
-    setMessage(`An email has been sent to ${email} to reset your password.`);
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/recover`, {
+        email
+      });
+      alert(response.data.message);
+    } catch (error) {
+      alert(error.response.data.error);
+    }
   };
 
   return (
@@ -20,9 +26,8 @@ function ForgotPassword() {
             <label>Email:</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </div>
-          <button type="submit" className="button">Send Reset Email</button>
+          <button type="submit" className="button">Submit</button>
         </form>
-        {message && <p>{message}</p>}
       </header>
     </div>
   );

@@ -30,7 +30,7 @@ body {
   justify-content: space-between;
   width: 100%;
   position: absolute;
-  top: 0; /* 将按钮放置在容器的顶部 */
+  top: 0; 
   left: 0;
   right: 0;
   padding: 10px 20px;
@@ -45,19 +45,19 @@ body {
 }
 
 .profile-icon {
-  width: 40px; /* 调整宽度 */
-  height: 40px; /* 调整高度 */
-  border-radius: 50%; /* 使图片变成圆形 */
-  border: 2px solid #007bff; /* 添加边框 */
-  padding: 5px; /* 添加内边距 */
-  transition: transform 0.3s ease; /* 添加过渡效果 */
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
+  border: 2px solid #007bff; 
+  padding: 5px; 
+  transition: transform 0.3s ease; 
   margin-top: -999px;
   margin-bottom: 20px;
   margin-left: -40px;
 }
 
 .profile-icon:hover {
-  transform: scale(1.1); /* 鼠标悬停时放大 */
+  transform: scale(1.1); 
 }
 
 .logout-button {
@@ -67,8 +67,8 @@ body {
   cursor: pointer;
   font-size: 14px;
   text-decoration: underline;
-  height: 10px; /* 调整高度 */
-  line-height: 40px; /* 调整行高 */
+  height: 10px; 
+  line-height: 40px; 
   margin-top: -70px;
   margin-bottom: 20px;
   margin-right: -40px;
@@ -80,7 +80,7 @@ body {
 
 .content {
   position: relative;
-  padding-top: 60px; /* 确保内容不会与按钮重叠 */
+  padding-top: 60px; 
 }
 
 .centered-column {
@@ -121,8 +121,8 @@ body {
 }
 
 .record-button-image {
-  width: 40px; /* 调整按钮大小 */
-  height: 40px; /* 调整按钮大小 */
+  width: 40px; 
+  height: 40px; 
   border-radius: 50%;
   border: 2px solid #007bff;
   padding: 5px;
@@ -182,7 +182,7 @@ form {
 
 form label {
   margin-right: 10px;
-  width: 150px; /* 调整宽度 */
+  width: 150px; 
   text-align: right;
 }
 
@@ -191,7 +191,7 @@ form input {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  width: 200px; /* 调整宽度 */
+  width: 200px; 
 }
 
 form button {

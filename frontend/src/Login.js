@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 
 function Login() {
@@ -7,16 +8,20 @@ function Login() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(user => user.username === username && user.password === password);
-
-    if (user) {
-      localStorage.setItem('currentUserId', user.id);
+    try {
+      console.log('API URL:', process.env.REACT_APP_API_URL); 
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
+        username,
+        password
+      });
+      const { token } = response.data;
+      localStorage.setItem('jwt', token);
+      alert('Login successful');
       navigate('/main');
-    } else {
-      alert('Invalid username or password');
+    } catch (error) {
+      alert(error.response.data.message);
     }
   };
 

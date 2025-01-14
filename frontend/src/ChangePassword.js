@@ -1,32 +1,33 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 
 function ChangePassword() {
-  const storedUser = JSON.parse(localStorage.getItem('users'))[0]; // 假设只有一个用户
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleChangePassword = (e) => {
+  const handleChangePassword = async (e) => {
     e.preventDefault();
-    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-    const userIndex = existingUsers.findIndex(user => user.email === storedUser.email);
+    if (newPassword !== confirmNewPassword) {
+      alert('New passwords do not match');
+      return;
+    }
 
-    if (userIndex !== -1) {
-      if (existingUsers[userIndex].password !== currentPassword) {
-        alert('Current password is incorrect');
-        return;
-      }
-      if (newPassword !== confirmNewPassword) {
-        alert('New passwords do not match');
-        return;
-      }
-      existingUsers[userIndex].password = newPassword;
-      localStorage.setItem('users', JSON.stringify(existingUsers));
-      alert('Password changed successfully');
+    try {
+      const token = localStorage.getItem('jwt');
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/recover/password`, {
+        currentPassword,
+        newPassword
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      alert(response.data.message);
       navigate('/profile');
+    } catch (error) {
+      alert(error.response.data.error);
     }
   };
 

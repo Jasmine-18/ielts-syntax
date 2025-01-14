@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 
 function Register() {
@@ -11,45 +12,32 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
-  const validatePassword = (password) => {
-    const minLength = 8;
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    return password.length >= minLength && hasUpperCase && hasLowerCase && hasSymbol;
-  };
-
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert('Passwords do not match');
       return;
     }
 
-    if (!validatePassword(password)) {
-      alert('Password must be at least 8 characters long and contain at least one symbol, one uppercase letter, and one lowercase letter');
-      return;
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, {
+        username,
+        email,
+        firstName,
+        lastName,
+        password
+      });
+      if (response && response.data && response.data.token) {
+        const { token } = response.data;
+        localStorage.setItem('jwt', token);
+        alert('Registration successful');
+        navigate('/main');
+      } else {
+        throw new Error('Invalid response from server');
+      }
+    } catch (error) {
+      alert(error.response?.data?.error || error.message);
     }
-
-    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
-    if (existingUsers.some(user => user.username === username)) {
-      alert('Username already exists');
-      return;
-    }
-
-    const newUser = {
-      id: Date.now().toString(),
-      username,
-      email,
-      firstName,
-      lastName,
-      password
-    };
-    existingUsers.push(newUser);
-    localStorage.setItem('users', JSON.stringify(existingUsers));
-    localStorage.setItem('currentUserId', newUser.id);
-
-    navigate('/login');
   };
 
   return (
