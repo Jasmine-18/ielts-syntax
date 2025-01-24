@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function Login() {
@@ -11,17 +13,16 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      console.log('API URL:', process.env.REACT_APP_API_URL); 
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
         username,
         password
       });
       const { token } = response.data;
       localStorage.setItem('jwt', token);
-      alert('Login successful');
+      toast.success('Login successful');
       navigate('/main');
     } catch (error) {
-      alert(error.response.data.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
 
@@ -49,6 +50,7 @@ function Login() {
           </p>
         </div>
       </header>
+      <ToastContainer />
     </div>
   );
 }
