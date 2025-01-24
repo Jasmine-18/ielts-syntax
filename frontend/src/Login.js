@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function Login() {
@@ -19,10 +17,10 @@ function Login() {
       });
       const { token } = response.data;
       localStorage.setItem('jwt', token);
-      toast.success('Login successful');
+      alert('Login successful');
       navigate('/main');
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      alert(error.response?.data?.message || error.message);
     }
   };
 
@@ -50,7 +48,6 @@ function Login() {
           </p>
         </div>
       </header>
-      <ToastContainer />
     </div>
   );
 }
