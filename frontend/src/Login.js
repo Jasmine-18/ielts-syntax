@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import './App.css';
 
 function Login() {
@@ -17,10 +18,19 @@ function Login() {
       });
       const { token } = response.data;
       localStorage.setItem('jwt', token);
-      alert('Login successful');
+      Swal.fire({
+        icon: 'success',
+        title: 'Login successful',
+        showConfirmButton: false,
+        timer: 1500
+      });
       navigate('/main');
     } catch (error) {
-      alert(error.response?.data?.message || error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.response?.data?.message || error.message,
+      });
     }
   };
 
