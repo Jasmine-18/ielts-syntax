@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import './App.css';
 
 function ForgotPassword() {
@@ -11,9 +12,17 @@ function ForgotPassword() {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/recover`, {
         email
       });
-      alert(response.data.message);
+      Swal.fire({
+        icon: 'success',
+        title: 'Email Sent',
+        text: response.data.message,
+      });
     } catch (error) {
-      alert(error.response.data.error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.response.data.error,
+      });
     }
   };
 
