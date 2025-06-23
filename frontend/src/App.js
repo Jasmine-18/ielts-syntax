@@ -31,7 +31,7 @@ function AppContent() {
 
   return (
     <div className="App">
-      <title>IELTS Speaking Test Simulator</title>
+      {/* <title>IELTS Speaking Test Simulator</title> */}
       <header className="App-header">
         <div className="header-buttons">
           <button onClick={handleProfileClick} className="profile-button">
