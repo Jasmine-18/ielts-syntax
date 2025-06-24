@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "IeltsSyntaxApplication",
+            "request": "launch",
+            "mainClass": "com.example.ieltsSyntax.IeltsSyntaxApplication",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
